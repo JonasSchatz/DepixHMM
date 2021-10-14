@@ -67,12 +67,22 @@ This could result in the tuples `(1), (1,2), (1,2), (2), (2,3), (3,4), ...` from
 ![](documentation/training_data.png)
 
 ## Installation and Usage
-Download the repository and set up your virtual environment, using the packages from the `requirements.txt` file.
-Use the code samples from the `examples` and `experiments` folder to get started.
+Download the repository.
 
-If you want to use the code to recover text from your own images, read the sections below. Providing an easy-to-use tool
-with a good user experience honestly wasn't the goal of this project. Reach out to me though, I'm more than happy to help
-you out.
+Set up and activate your virtual environment. On windows, for example, type into your console:
+```
+python -m venv venv
+.\venv\Scripts.activate.bat
+```
+
+Install the packages from the `requirements.txt` file:
+```
+pip install -r requirements.txt
+```
+
+Use the code samples from the `examples` and `experiments` folder to get started. If you want to use the code to recover 
+text from your own images, read the sections below. Providing an easy-to-use tool with a good user experience honestly 
+wasn't the goal of this project. Reach out to me though, I'm more than happy to help you out.
 
 ### Correct Cropping of Images
 
