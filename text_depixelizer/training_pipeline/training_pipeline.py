@@ -3,6 +3,8 @@ from random import randint
 import time
 from typing import List, Tuple
 
+from PIL.ImageFont import FreeTypeFont
+
 from text_depixelizer.parameters import PictureParameters
 from text_depixelizer.training_pipeline.original_image import ImageCreationOptions, OriginalImage, generate_image_from_text
 from text_depixelizer.training_pipeline.pixelized_image import PixelizationOptions, PixelizedImage, pixelize_image
@@ -17,8 +19,20 @@ def create_training_data(n_img: int, picture_parameters: PictureParameters) \
     """
 
     texts: List[str] = generate_texts(n_img, picture_parameters.pattern)
-    original_images: List[OriginalImage] = generate_original_images(texts, picture_parameters.font)
-    pixelized_images: List[PixelizedImage] = generate_pixelized_images(original_images, picture_parameters.block_size, picture_parameters.randomize_pixelization_origin_x, picture_parameters.offset_y)
+    original_images: List[OriginalImage] = generate_original_images(
+        texts=texts,
+        font=picture_parameters.font,
+        font_color=picture_parameters.font_color,
+        background_color=picture_parameters.background_color
+    )
+
+    pixelized_images: List[PixelizedImage] = generate_pixelized_images(
+        original_images,
+        picture_parameters.block_size,
+        picture_parameters.randomize_pixelization_origin_x,
+        picture_parameters.offset_y
+    )
+
     windows: List[List[Window]] = generate_windows(original_images, pixelized_images, picture_parameters.window_size)
     return texts, original_images, pixelized_images, windows
 
@@ -39,7 +53,12 @@ def generate_texts(n_img: int, pattern: str) -> List[str]:
     return texts
 
 
-def generate_original_images(texts, font) -> List[OriginalImage]:
+def generate_original_images(
+        texts: List[str],
+        font: FreeTypeFont,
+        font_color: Tuple[int, int, int] = (0, 0, 0),
+        background_color: Tuple[int, int, int] = (255, 255, 255)
+    ) -> List[OriginalImage]:
     """
     Given a list of texts and a font, generate images with that text and font
     Padding will be added around the text to allow space for pixelization that extends over the text's bounding box
@@ -47,7 +66,13 @@ def generate_original_images(texts, font) -> List[OriginalImage]:
     time_logger: logging.Logger = logging.getLogger('time_logger')
     t = time.perf_counter()
 
-    image_creation_options: ImageCreationOptions = ImageCreationOptions(padding=(20, 20), font=font)
+    image_creation_options: ImageCreationOptions = ImageCreationOptions(
+        padding=(20, 20),
+        font=font,
+        font_color=font_color,
+        background_color=background_color
+    )
+
     original_images: List[OriginalImage] = [generate_image_from_text(text, image_creation_options) for text in texts]
 
     if len(texts) > 100:

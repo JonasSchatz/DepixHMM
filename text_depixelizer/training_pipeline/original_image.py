@@ -38,6 +38,7 @@ class OriginalImage:
         ascent, descent = self.image_creation_options.font.getmetrics()
         return ascent, descent
 
+
 def generate_image_from_text(text: str, options: ImageCreationOptions) -> OriginalImage:
     width, height = options.font.getsize(text)
     ascent, descent = options.font.getmetrics()
