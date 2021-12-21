@@ -110,7 +110,7 @@ It is relatively easy to crop the images in the training pipeline, I just haven'
 ### Explanation of Parameters
 Configuring the code is done by setting two sets of parameters. The first set are the `PictureParameters`. They contain the following values:
 - `pattern`: A regex pattern to generate sample text from. For passwords with a length between 6 and 9 characters containing digits, 
-lower- and uppercase letters, this would be `r'[a-zA-Z\d]{6-9}'`. See the `rstr` package on [github](https://github.com/leapfrogonline/rstr) 
+lower- and uppercase letters, this would be `r'[a-zA-Z\d]{6,9}'`. See the `rstr` package on [github](https://github.com/leapfrogonline/rstr) 
 for more information. One possible improvement would be to feed a corpus of natural language data into the training pipeline.
 - `font`: The font that is most likely used. Often, we want to decode information taken from a partially pixelized screenshot.
 In this case, it is possible to infer the used font from the unobscured text that is still visible. Note that the availability
