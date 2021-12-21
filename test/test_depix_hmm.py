@@ -2,6 +2,7 @@ import logging
 from unittest import TestCase
 
 from PIL import ImageFont
+from PIL.ImageFont import FreeTypeFont
 
 from resources.fonts import DemoFontPaths
 from text_depixelizer.depix_hmm import depix_hmm_grid_search

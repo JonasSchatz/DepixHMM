@@ -1,14 +1,16 @@
 from dataclasses import dataclass, field
 import logging
-from typing import List
+from typing import List, Tuple
 
-from PIL import ImageFont
+from PIL.ImageFont import FreeTypeFont
 
 
 @dataclass
 class PictureParameters:
     pattern: str
-    font: ImageFont
+    font: FreeTypeFont
+    font_color: Tuple[int, int, int] = (0, 0, 0)
+    background_color: Tuple[int, int, int] = (255, 255, 255)
     block_size: int = None # ToDo: can be inferred
     randomize_pixelization_origin_x: bool = False
     window_size: int = 5

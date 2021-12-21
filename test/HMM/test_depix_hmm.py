@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import List
 
 import numpy as np
-from PIL import ImageFont, Image
+from PIL import Image, ImageFont
 
 from resources.fonts import DemoFontPaths
 from test.utils import demo_training_parameters, demo_picture_parameters
@@ -46,7 +46,6 @@ class TestDepixHmm(unittest.TestCase):
         self.assertLessEqual(accuracy, 1)
         self.assertIsInstance(accuracy, float)
         self.assertIsInstance(average_distance, float)
-
 
     def test_get_starting_probabilities(self):
         # Arrange

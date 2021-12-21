@@ -1,7 +1,7 @@
 import logging
 import unittest
 
-from PIL import ImageFont
+from PIL import FreeTypeFont
 
 from resources.fonts import DemoFontPaths
 from text_depixelizer.depix_hmm import depix_hmm
@@ -19,7 +19,7 @@ class BackAccountExperiments(unittest.TestCase):
         picture_parameters: PictureParameters = PictureParameters(
             block_size=6,
             pattern=r'\d{7}',
-            font=ImageFont.truetype(str(DemoFontPaths.arial), 24),
+            font=FreeTypeFont.truetype(str(DemoFontPaths.arial), 24),
             window_size=2,
             randomize_pixelization_origin_x=True
         )
